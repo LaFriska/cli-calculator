@@ -21,21 +21,31 @@ instance Show Equation where
         wrap subeq = case subeq of 
             Num _      -> show subeq
             Node _ _ _ -> "(" ++ (show subeq) ++ ")"
-            
-data EquationErr = Eq Equation 
-                 | ErrEq String 
-data StringErr = Str String 
-               | ErrStr String
 
-parse :: String -> EquationErr
+parse :: String -> Maybe Equation 
 parse string = undefined
+
+
+getSubequation :: String -> Maybe String 
+getSubequation str = recurseSubequation str 0 False ""
+
 
 -- Returns a Maybe EquationErr surrounded by an outher layer of brackets, or error
 -- if there is a bracket mismatch, or Nothing if no brackets are found. 
-getSubequation :: String -> Int -> Bool -> String -> Maybe StringErr
-getSubequation str bracketCount hasBracket currentSub = case (bracketCount, hasBracket) of --TODO
-    (0, True)  -> Just (Str currentSub)
+recurseSubequation :: String -> Int -> Bool -> String -> Maybe String
+recurseSubequation str bracketCount hasBracket currentSub = case (bracketCount, hasBracket) of --TODO
+    (0, True)  -> Just currentSub
     (0, False) -> case str of
         []   -> Nothing 
-        x:xs -> undefined 
-    (_, True)  -> undefined 
+        x:xs
+            | x == '('  -> recurseSubequation xs (bracketCount + 1) True currentSub
+            | x == ')' -> Nothing
+            | otherwise -> recurseSubequation xs 0 False ""
+    (_, True)  -> case str of 
+        [] ->  Nothing
+        x:xs
+            | x == '(' -> recurseSubequation xs (bracketCount + 1) True (currentSub ++ [x])
+            | x == ')' -> if bracketCount == 1 then recurseSubequation xs (bracketCount - 1) True currentSub
+                                               else recurseSubequation xs (bracketCount - 1) True (currentSub ++ [x])
+            | otherwise -> recurseSubequation xs bracketCount True (currentSub ++ [x])
+    (_, False) -> Nothing 
