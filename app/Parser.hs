@@ -36,11 +36,11 @@ recurseSubequation :: String -> Int -> Bool -> String -> Maybe String
 recurseSubequation str bracketCount hasBracket currentSub = case (bracketCount, hasBracket) of --TODO
     (0, True)  -> Just currentSub
     (0, False) -> case str of
-        []   -> Nothing 
+        []   -> Just currentSub 
         x:xs
-            | x == '('  -> recurseSubequation xs (bracketCount + 1) True currentSub
+            | x == '('  -> recurseSubequation xs (bracketCount + 1) True ""
             | x == ')' -> Nothing
-            | otherwise -> recurseSubequation xs 0 False ""
+            | otherwise -> recurseSubequation xs 0 False (currentSub ++ [x])
     (_, True)  -> case str of 
         [] ->  Nothing
         x:xs
