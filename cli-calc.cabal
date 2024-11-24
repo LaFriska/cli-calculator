@@ -39,6 +39,7 @@ library
 executable cli-calc-exe
   main-is: Main.hs
   other-modules:
+      Parser
       Paths_cli_calc
   autogen-modules:
       Paths_cli_calc
