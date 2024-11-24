@@ -1,0 +1,10 @@
+Test suite cli-calc-test: RUNNING...
+Cases: 8  Tried: 0  Errors: 0  Failures: 0Cases: 8  Tried: 1  Errors: 0  Failures: 0Cases: 8  Tried: 2  Errors: 0  Failures: 0Cases: 8  Tried: 3  Errors: 0  Failures: 0Cases: 8  Tried: 4  Errors: 0  Failures: 0Cases: 8  Tried: 5  Errors: 0  Failures: 0                                          ### Failure in: 5:Subequation Simple 4
+test/Spec.hs:36
+for mismatched brackets.
+expected: "Nothing"
+ but got: "fox (jumped over)"
+Cases: 8  Tried: 6  Errors: 0  Failures: 1Cases: 8  Tried: 7  Errors: 0  Failures: 1                                          Cases: 8  Tried: 8  Errors: 0  Failures: 1
+Counts {cases = 8, tried = 8, errors = 0, failures = 1}
+Test suite cli-calc-test: FAIL
+Test suite logged to: /Users/mozzarella/Desktop/Dev/cli-calc/dist-newstyle/build/aarch64-osx/ghc-9.4.8/cli-calc-0.1.0.0/t/cli-calc-test/test/cli-calc-0.1.0.0-cli-calc-test.log
